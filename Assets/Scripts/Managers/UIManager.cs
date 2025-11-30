@@ -11,14 +11,14 @@ public class UIManager : MonoBehaviour
 		text = transform.Find("HealthText").gameObject.GetComponent<TextMeshProUGUI>();
 	}
 
-	public void SetHealthText()
+	public void SetPlayerHealthText()
 	{
 		if (text != null && PlayerHealth.instance != null)
 		{
 			float red = 1.0f - PlayerHealth.instance.Health / PlayerHealth.instance.MaxHealth;
 			float green = PlayerHealth.instance.Health / PlayerHealth.instance.MaxHealth;
 			text.color = new Color(red, green, 0.0f);
-			text.SetText($"Health: {PlayerHealth.instance.Health}");
+			text.SetText($"Health: {(int)PlayerHealth.instance.Health}");
 			
 		}
 	}

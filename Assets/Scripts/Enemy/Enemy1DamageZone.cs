@@ -2,8 +2,9 @@ using UnityEngine;
 
 public class Enemy1DamageZone : MonoBehaviour
 {
-	public float damagePerSecond = 10.0f;
+	[SerializeField] private float damagePerSecond = 10.0f;
 	private bool isPlayerInside = false;
+	[HideInInspector] public bool IsPlayerInside => isPlayerInside;
 	void OnTriggerExit(Collider other)
 	{
 		if(other.CompareTag("Player"))

@@ -5,9 +5,6 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
 	[HideInInspector] public static PlayerHealth instance;
-
-	[Header("Health Text")]
-	[SerializeField] private TextMeshPro text;
 	
 	[Header("Health")]
 	[SerializeField] private float maxHealth = 100;
@@ -25,11 +22,8 @@ public class PlayerHealth : MonoBehaviour
 		}
 		set
 		{
-			if (value >= minHealth && value <= maxHealth)
-			{
-				health = value;
-				UIManager.instance.SetHealthText();
-			}
+			health = Mathf.Clamp(value, minHealth, maxHealth);
+			UIManager.instance.SetPlayerHealthText();
 		}
 	}
 	
@@ -38,5 +32,10 @@ public class PlayerHealth : MonoBehaviour
 	{
 		instance = this;
 	}
-	
+
+	void Start()
+	{
+		UIManager.instance.SetPlayerHealthText();
+	}
+
 }

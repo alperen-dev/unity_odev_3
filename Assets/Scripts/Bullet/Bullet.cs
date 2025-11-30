@@ -2,8 +2,9 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] private float speed = 20.0f;
-	[SerializeField] private float projectileDistance = 200.0f;
+    [SerializeField] private float speed = 30.0f;
+	[SerializeField] private float projectileDistance = 50.0f;
+	[SerializeField] private float damage = 25.0f;
 	private float sqrProjectileDistance;
 	
 	private Vector3 startPos;
@@ -24,9 +25,14 @@ public class Bullet : MonoBehaviour
 	}
 	void OnTriggerEnter(Collider other)
 	{
-		if(other.CompareTag("Enemy") || other.CompareTag("Player"))
+		if(other.CompareTag("Enemy"))
 		{
-			Destroy(other.gameObject);
+			other.gameObject.GetComponent<EnemyHealth>().Health -= damage;
+			Destroy(gameObject);
+		}
+		else if(other.CompareTag("Player"))
+		{
+			other.gameObject.GetComponent<PlayerHealth>().Health -= damage;
 			Destroy(gameObject);
 		}
 	}
